@@ -1,0 +1,59 @@
+﻿{
+  "id": "55041C39-CFDF-49DE-9CF6-F92790DE9B57",
+  "name": "AzureStartStopWebsite",
+  "friendlyName": "Azure Start Stop website",
+  "description": "Start/stop Azure website",
+  "helpMarkDown": "",
+  "category": "Deploy",
+  "visibility": [ "Build", "Release" ],
+  "author": "Luis Fraile",
+  "version": {
+    "Major": 1,
+    "Minor": 0,
+    "Patch": 4
+  },
+  "demands": [ "azureps" ],
+  "minimumAgentVersion": "1.90.0",
+  "inputs": [
+    {
+      "name": "ConnectedServiceName",
+      "type": "connectedService:Azure",
+      "label": "AzureSubscription",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Azure subscription for the website"
+    },
+    {
+      "name": "SiteName",
+      "type": "string",
+      "label": "Website name",
+      "defaultValue": "",
+      "required": true,
+      "helpMarkDown": "Website name."
+    },
+    {
+      "name": "SlotName",
+      "type": "string",
+      "label": "Slot name (production by default)",
+      "defaultValue": "production",
+      "required": true,
+      "helpMarkDown": "slot name for the website."
+    },    
+    {
+      "name": "Start",
+      "type": "boolean",
+      "label": "Start/Stop",
+      "defaultValue": true,
+      "required": true,
+      "helpMarkDown": "Starts the site if checked"
+    }
+  ],
+  "instanceNameFormat": "Start/stop website",
+  "execution": {
+    "AzurePowerShell": {
+      "target": "$(currentDirectory)\\StartStopWebsite.ps1",
+      "argumentFormat": "",
+      "workingDirectory": "$(currentDirectory)"
+    }
+  }
+}
